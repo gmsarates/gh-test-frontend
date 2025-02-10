@@ -5,9 +5,11 @@ import ActivityList from './components/ActivityList';
 import Report from './components/Report';
 import {Modal, Button} from 'react-bootstrap';
 import Toast from "./components/Toast";
-
-
+import {Link, Route, Routes} from "react-router-dom";
 import './App.scss'
+import ReportPage from "./components/ReportPage";
+
+
 
 const App = () => {
     const [activities, setActivities] = useState([]);
@@ -47,7 +49,26 @@ const App = () => {
     return (
         <div className="App">
             <div className="header">
-                <h1>Gerenciador de Atividades</h1>
+                <nav className="navbar navbar-expand-lg">
+                    <div className="container-fluid">
+                        <Link className="navbar-brand" to="/">Gerenciador de Atividades</Link>
+                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
+                        <div className="collapse navbar-collapse" id="navbarNav">
+                            <ul className="navbar-nav">
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/">Atividades</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/report">Relatório</Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
             </div>
             <div className="content">
                 <div className="container">
@@ -58,16 +79,44 @@ const App = () => {
                                 Cadastrar nova atividade
                             </Button>
                         </div>
-
-                        <ActivityList activities={activities} onActivityDeleted={handleActivityDeleted}/>
-                        {/*<Report />*/}
+                        <Routes>
+                            <Route path="/"
+                                   element={<ActivityList activities={activities} onActivityDeleted={handleActivityDeleted}/>}/>
+                            <Route path="/report" element={<ReportPage/>}/>
+                        </Routes>
                     </div>
                 </div>
-            </div>
 
-            <ActivityForm handleModal={handleModal} onActivityAdded={handleActivityAdded} />
+                <ActivityForm handleModal={handleModal} onActivityAdded={handleActivityAdded} />
+            </div>
         </div>
     );
 };
 
 export default App;
+
+
+
+//<div className="App">
+//             <div className="header">
+//                 <h1>Gerenciador de Atividades</h1>
+//                 <Button variant="light" className="btn-sm px-3">Relatório</Button>
+//             </div>
+//             <div className="content">
+//                 <div className="container">
+//                     <div className="card card-body">
+//                         <div className="d-flex align-items-center justify-content-between">
+//                             <h4 className="mb-0">Atividades registradas</h4>
+//                             <Button variant="primary" className="mb-0" onClick={handleShowModal}>
+//                                 Cadastrar nova atividade
+//                             </Button>
+//                         </div>
+//
+//                         <ActivityList activities={activities} onActivityDeleted={handleActivityDeleted}/>
+//                         {/*<Report />*/}
+//                     </div>
+//                 </div>
+//             </div>
+//
+//
+//         </div>
