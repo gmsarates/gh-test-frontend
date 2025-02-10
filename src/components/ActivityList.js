@@ -4,6 +4,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import {Button, ListGroup, ListGroupItem} from "react-bootstrap";
 import Toast from "./Toast";
+import moment from 'moment';
 
 
 const ActivityList = ({ activities, onActivityDeleted }) => {
@@ -38,7 +39,7 @@ const ActivityList = ({ activities, onActivityDeleted }) => {
                     <div className="info">
                         <strong>{activity.name}</strong>
                         <div className="d-flex flex-column align-items-start">
-                            <small>{new Date(activity.startTime).toLocaleString()} até {new Date(activity.endTime).toLocaleString()}</small>
+                            <small>{moment(activity.startTime).format('DD/MM/YYYY - HH:mm')} até {moment(activity.endTime).format('DD/MM/YYYY - HH:mm')}</small>
                             <small>{activity.elapsedTime} Horas</small>
                         </div>
                     </div>
