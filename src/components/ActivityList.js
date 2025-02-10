@@ -20,7 +20,7 @@ const ActivityList = ({ activities, onActivityDeleted }) => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`http://localhost:3000/api/activities/${id}`);
+                    await axios.delete(process.env.REACT_APP_API_URL + id);
 
                     Toast('success', 'Atividade excluída com sucesso');
 

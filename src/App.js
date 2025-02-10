@@ -2,14 +2,10 @@ import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import ActivityForm from './components/ActivityForm';
 import ActivityList from './components/ActivityList';
-import Report from './components/Report';
-import {Modal, Button} from 'react-bootstrap';
-import Toast from "./components/Toast";
+import {Button} from 'react-bootstrap';
 import {Link, Route, Routes} from "react-router-dom";
 import './App.scss'
 import ReportPage from "./components/ReportPage";
-
-
 
 const App = () => {
     const [activities, setActivities] = useState([]);
@@ -20,7 +16,7 @@ const App = () => {
 
     const fetchActivities = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/activities');
+            const response = await axios.get(process.env.REACT_APP_API_URL);
             setActivities(response.data);
         } catch (error) {
             console.error('Error fetching activities:', error);
@@ -94,29 +90,3 @@ const App = () => {
 };
 
 export default App;
-
-
-
-//<div className="App">
-//             <div className="header">
-//                 <h1>Gerenciador de Atividades</h1>
-//                 <Button variant="light" className="btn-sm px-3">Relatório</Button>
-//             </div>
-//             <div className="content">
-//                 <div className="container">
-//                     <div className="card card-body">
-//                         <div className="d-flex align-items-center justify-content-between">
-//                             <h4 className="mb-0">Atividades registradas</h4>
-//                             <Button variant="primary" className="mb-0" onClick={handleShowModal}>
-//                                 Cadastrar nova atividade
-//                             </Button>
-//                         </div>
-//
-//                         <ActivityList activities={activities} onActivityDeleted={handleActivityDeleted}/>
-//                         {/*<Report />*/}
-//                     </div>
-//                 </div>
-//             </div>
-//
-//
-//         </div>

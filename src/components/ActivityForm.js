@@ -14,7 +14,7 @@ const ActivityForm = ({handleModal, onActivityAdded}) => {
         const newActivity = {name, startTime, endTime};
         console.log(newActivity)
         try {
-            const response = await axios.post('http://localhost:3000/api/activities', newActivity);
+            const response = await axios.post(process.env.REACT_APP_API_URL, newActivity);
             onActivityAdded(response.data);
             setName('');
             setStartTime('');
